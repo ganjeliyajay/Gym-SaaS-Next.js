@@ -16,13 +16,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Selection */
+/* ================================
+   Selection
+================================ */
+
 ::selection {
   background: rgba(245, 158, 11, 0.25);
   color: #fef3c7;
 }
 
-/* Scrollbar */
+/* ================================
+   Scrollbar
+================================ */
+
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -41,12 +47,16 @@ body {
 }
 
 /* Firefox */
+
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(245, 158, 11, 0.35) #050810;
 }
 
-/* Reusable glass card */
+/* ================================
+   Reusable Glass Card
+================================ */
+
 .glass-card {
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -55,7 +65,10 @@ body {
   box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
 }
 
-/* Reusable glass panel */
+/* ================================
+   Reusable Glass Panel
+================================ */
+
 .glass-panel {
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -63,25 +76,35 @@ body {
   -webkit-backdrop-filter: blur(24px);
 }
 
-/* Gold gradient text */
+/* ================================
+   Gold Gradient Text
+================================ */
+
 .text-gold-gradient {
   background: linear-gradient(90deg,
       #fde68a 0%,
       #fbbf24 45%,
       #f97316 100%);
+
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
-/* Subtle glow */
+/* ================================
+   Subtle Glow
+================================ */
+
 .gold-glow {
   box-shadow:
     0 0 30px rgba(245, 158, 11, 0.08),
     0 20px 70px rgba(0, 0, 0, 0.25);
 }
 
-/* Focus accessibility */
+/* ================================
+   Focus Accessibility
+================================ */
+
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
@@ -91,18 +114,27 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
-/* Prevent horizontal overflow */
+/* ================================
+   Prevent Horizontal Overflow
+================================ */
+
 body {
   overflow-x: hidden;
 }
 
-/* Smooth image rendering */
+/* ================================
+   Smooth Image Rendering
+================================ */
+
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Reduced motion */
+/* ================================
+   Reduced Motion
+================================ */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -116,6 +148,10 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ================================
+   Toast Animations
+================================ */
 
 @keyframes toast-enter {
   0% {
@@ -155,9 +191,41 @@ img {
   transform-origin: left;
 }
 
+/* ================================
+   Toast Reduced Motion
+================================ */
+
 @media (prefers-reduced-motion: reduce) {
+
   .toast-enter,
   .toast-progress {
     animation: none !important;
   }
+}
+
+/* ================================
+   TOP SCROLL PROGRESS BAR
+================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 0%;
+  height: 3px;
+
+  z-index: 99999;
+  pointer-events: none;
+
+  background: linear-gradient(90deg,
+      #fde68a 0%,
+      #fbbf24 45%,
+      #f97316 100%);
+
+  box-shadow:
+    0 0 10px rgba(245, 158, 11, 0.45),
+    0 0 20px rgba(245, 158, 11, 0.2);
+
+  transition: width 80ms linear;
 }
