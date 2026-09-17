@@ -1,176 +1,460 @@
-"use client";
+"use client"
 
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
+import { motion, type Variants } from "motion/react"
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronRight,
-  CreditCard,
+  Play,
   ShieldCheck,
+  Users,
   Zap,
-} from "lucide-react";
+} from "lucide-react"
 
-const stats = [
-  {
-    value: "99.98%",
-    label: "Door Uptime SLA",
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
+    },
   },
-  {
-    value: "$24M+",
-    label: "Processed Volume",
+}
+
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
   },
-  {
-    value: "< 40ms",
-    label: "Door Unlock Latency",
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
   },
-  {
-    value: "100%",
-    label: "Digital Waivers",
-  },
-];
+}
 
 export default function HeroSection() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#070b14]">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[-180px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-amber-500/[0.10] blur-[140px]" />
+    <section className="relative min-h-screen overflow-hidden bg-black pt-20">
+      {/* Background Image */}
 
-        <div className="absolute -left-40 top-[280px] h-[350px] w-[350px] rounded-full bg-orange-500/[0.06] blur-[120px]" />
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            scale: [1, 1.025, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Image
+            src="/images/gym-hero.png"
+            alt="Modern gym training environment"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
 
-        <div className="absolute -right-40 top-[420px] h-[350px] w-[350px] rounded-full bg-yellow-500/[0.05] blur-[120px]" />
+        {/* Light dark overlay */}
+
+        <div className="absolute inset-0 bg-black/10" />
+
+        {/* Text readability */}
+
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent" />
+
+        {/* Bottom fade */}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10" />
+
+        {/* Orange atmosphere */}
+
+        <motion.div
+          className="absolute right-[20%] top-[25%] h-[420px] w-[420px] rounded-full bg-orange-500/10 blur-[120px]"
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.25, 0.5, 0.25],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Grid */}
+
+        <div className="hero-grid absolute inset-0" />
+
+        {/* Moving orange light */}
+
+        <motion.div
+          className="absolute left-[-20%] top-[45%] h-[2px] w-[45%] bg-gradient-to-r from-transparent via-orange-500 to-transparent"
+          animate={{
+            x: ["0%", "300%"],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Particles */}
+
+        <motion.span
+          className="hero-particle left-[8%] top-[30%]"
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.2, 1, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.span
+          className="hero-particle left-[20%] top-[70%]"
+          animate={{
+            y: [0, -25, 0],
+            opacity: [0.2, 0.9, 0.2],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+
+        <motion.span
+          className="hero-particle right-[25%] top-[25%]"
+          animate={{
+            y: [0, -25, 0],
+            opacity: [0.2, 1, 0.2],
+          }}
+          transition={{
+            duration: 4.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
+        />
       </div>
 
-      {/* Grid background */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
+      {/* Content */}
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28 lg:px-8 lg:pb-24 lg:pt-32">
-        <div className="mx-auto max-w-5xl text-center">
-          {/* Badge */}
-          <div className="mb-7 flex justify-center">
-            <div className="group inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.07] px-3 py-1.5 shadow-[0_0_30px_rgba(245,158,11,0.05)] backdrop-blur-xl transition hover:border-amber-400/35 hover:bg-amber-400/[0.10]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
-              </span>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="flex min-h-[calc(100vh-80px)] items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="max-w-3xl py-16 lg:py-20">
+            {/* Badge */}
 
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-amber-300 sm:text-[11px]">
-                Built for Modern Gyms, Martial Arts Dojos & CrossFit Boxes
-              </span>
-
-              <ChevronRight className="h-3.5 w-3.5 text-amber-400/50 transition group-hover:translate-x-0.5" />
-            </div>
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-balance text-4xl font-black leading-[1.05] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl">
-            The Complete Operating System
-            <br className="hidden sm:block" />
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent">
-                for Elite Athletic Clubs
-              </span>
-
-              <span className="absolute -bottom-2 left-1/2 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent blur-[1px]" />
-            </span>
-          </h1>
-
-          {/* Description */}
-          <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/45 sm:text-base sm:leading-8">
-            Run your entire fitness business from one powerful platform.
-            Manage members, recurring billing, digital waivers, access
-            control, team permissions, and executive analytics without
-            stitching together multiple systems.
-          </p>
-
-          {/* CTA */}
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/dashboard"
-              className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 via-amber-400 to-orange-500 px-6 py-3.5 text-sm font-extrabold text-black shadow-[0_15px_45px_rgba(245,158,11,0.18)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_55px_rgba(245,158,11,0.28)] sm:w-auto"
-            >
-              <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
-
-              <Zap className="relative h-4 w-4" />
-              <span className="relative">Explore Live Gym Console</span>
-
-              <ArrowRight className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-
-            <Link
-              href="/signup/ironpulse/form_vip_onboarding"
-              target="_blank"
-              className="group flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.035] px-6 py-3.5 text-sm font-bold text-white/75 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-amber-400/25 hover:bg-white/[0.06] hover:text-white sm:w-auto"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
-              Test Public Signup Funnel
-              <ArrowRight className="h-4 w-4 text-white/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-amber-400" />
-            </Link>
-          </div>
-
-          {/* Trust line */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-wider text-white/25">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400/70" />
-              Secure Infrastructure
-            </span>
-
-            <span className="hidden h-3 w-px bg-white/10 sm:block" />
-
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-amber-400/70" />
-              Built for Scale
-            </span>
-
-            <span className="hidden h-3 w-px bg-white/10 sm:block" />
-
-            <span className="flex items-center gap-1.5">
-              <CreditCard className="h-3.5 w-3.5 text-blue-400/70" />
-              Recurring Payments
-            </span>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="relative mx-auto mt-16 max-w-5xl">
-          <div className="grid overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.025] shadow-2xl shadow-black/20 backdrop-blur-2xl sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className={`group relative px-5 py-6 text-center transition duration-300 hover:bg-white/[0.035] ${
-                  index !== stats.length - 1
-                    ? "border-b border-white/[0.07] sm:border-r lg:border-b-0"
-                    : ""
-                }`}
+            <motion.div variants={itemVariants}>
+              <motion.div
+                whileHover={{
+                  scale: 1.03,
+                  y: -2,
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-orange-500/40 bg-black/40 px-4 py-2.5 backdrop-blur-xl"
               >
-                <div className="absolute left-1/2 top-0 h-px w-12 -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+                <span className="relative flex h-2 w-2">
+                  <motion.span
+                    className="absolute h-full w-full rounded-full bg-orange-500"
+                    animate={{
+                      scale: [1, 2, 1],
+                      opacity: [0.8, 0, 0.8],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                    }}
+                  />
 
-                <p className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-                  {stat.value}
-                </p>
+                  <span className="relative h-2 w-2 rounded-full bg-orange-500" />
+                </span>
 
-                <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white/30">
-                  {stat.label}
-                </p>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/85">
+                  #1 Gym Management Platform
+                </span>
+              </motion.div>
+            </motion.div>
+
+            {/* Heading */}
+
+            <motion.h1
+              variants={itemVariants}
+              className="mt-7 text-[clamp(3.3rem,7vw,7.2rem)] font-black uppercase leading-[0.84] tracking-[-0.065em] text-white"
+            >
+              It&apos;s Time
+              <br />
+              To Gain More
+              <br />
+              <span className="hero-gradient-text">Muscles.</span>
+            </motion.h1>
+
+            {/* Description */}
+
+            <motion.p
+              variants={itemVariants}
+              className="mt-8 max-w-2xl text-sm leading-7 text-white/70 sm:text-base"
+            >
+              Manage your gym, members, trainers, payments and daily operations
+              with one powerful platform built for modern fitness businesses.
+            </motion.p>
+
+            {/* Benefits */}
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-7 flex flex-wrap gap-x-7 gap-y-3"
+            >
+              <div className="flex items-center gap-2 text-xs font-semibold text-white/75">
+                <CheckCircle2 className="h-4 w-4 text-orange-500" />
+                Easy Setup
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Bottom decorative line */}
-        <div className="mx-auto mt-14 flex max-w-3xl items-center gap-3">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/[0.08]" />
-          <div className="h-1 w-1 rounded-full bg-amber-400/60" />
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/[0.08]" />
+              <div className="flex items-center gap-2 text-xs font-semibold text-white/75">
+                <ShieldCheck className="h-4 w-4 text-orange-500" />
+                Secure Access
+              </div>
+
+              <div className="flex items-center gap-2 text-xs font-semibold text-white/75">
+                <Zap className="h-4 w-4 text-orange-500" />
+                Built to Scale
+              </div>
+            </motion.div>
+
+            {/* Buttons */}
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
+            >
+              <motion.div
+                whileHover={{
+                  y: -4,
+                  scale: 1.02,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
+              >
+                <Link
+                  href="/register"
+                  className="hero-main-button group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 px-7 py-4 text-sm font-bold text-white shadow-[0_15px_50px_rgba(249,115,22,0.3)] transition-all duration-300 hover:shadow-[0_20px_70px_rgba(249,115,22,0.45)]"
+                >
+                  Start Growing Your Gym
+                  <motion.span
+                    animate={{
+                      x: [0, 4, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </motion.span>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                whileHover={{
+                  y: -4,
+                  scale: 1.02,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
+              >
+                <Link
+                  href="#features"
+                  className="group inline-flex items-center justify-center gap-3 rounded-xl border border-white/20 bg-black/35 px-7 py-4 text-sm font-bold text-white/85 backdrop-blur-xl transition-all duration-300 hover:border-orange-500/50 hover:bg-orange-500/10 hover:text-white"
+                >
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/25 transition-all duration-300 group-hover:border-orange-500/70">
+                    <Play className="ml-0.5 h-3 w-3 fill-current" />
+                  </span>
+                  Explore Platform
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Trust */}
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-9 flex items-center gap-4"
+            >
+              <div className="flex -space-x-2">
+                {["01", "02", "03", "04"].map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.5,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                    }}
+                    transition={{
+                      delay: 0.8 + index * 0.1,
+                    }}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-neutral-500 to-neutral-800 text-[9px] font-bold text-white"
+                  >
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold text-white/80">
+                  Built for growing fitness businesses
+                </p>
+
+                <div className="mt-1 flex items-center gap-2">
+                  <span className="text-sm tracking-wide text-orange-500">
+                    ★★★★★
+                  </span>
+
+                  <span className="text-[10px] text-white/50">
+                    Gym management made simple
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Stats */}
+
+            <motion.div
+              variants={itemVariants}
+              className="mt-9 flex max-w-xl border-t border-white/15 pt-6"
+            >
+              <motion.div whileHover={{ y: -3 }} className="flex-1">
+                <p className="text-2xl font-black text-orange-500">10K+</p>
+
+                <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">
+                  Members Managed
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -3 }}
+                className="border-l border-white/15 px-6 sm:px-9"
+              >
+                <p className="text-2xl font-black text-orange-500">500+</p>
+
+                <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">
+                  Gyms
+                </p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -3 }}
+                className="border-l border-white/15 pl-6 sm:pl-9"
+              >
+                <p className="text-2xl font-black text-orange-500">99.9%</p>
+
+                <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">
+                  Uptime
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Side Label */}
+
+      <div className="absolute left-5 top-1/2 z-20 hidden -translate-y-1/2 xl:block">
+        <div className="flex items-center gap-3">
+          <span className="h-px w-8 bg-orange-500" />
+
+          <span className="text-[8px] font-bold uppercase leading-5 tracking-[0.25em] text-white/40">
+            Fitness
+            <br />
+            Management
+            <br />
+            Made Simple
+          </span>
         </div>
       </div>
+
+      {/* Right Label */}
+
+      <div className="absolute right-5 top-1/2 z-20 hidden -translate-y-1/2 xl:block">
+        <div className="flex flex-col items-end gap-3">
+          <span className="h-px w-8 bg-orange-500" />
+
+          <span className="text-right text-[8px] font-bold uppercase leading-5 tracking-[0.25em] text-white/40">
+            Train
+            <br />
+            Track
+            <br />
+            Grow
+          </span>
+        </div>
+      </div>
+
+      {/* Scroll */}
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 10,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 1.4,
+          duration: 0.8,
+        }}
+        className="absolute bottom-7 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center lg:flex"
+      >
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1.5">
+          <motion.span
+            className="h-2 w-1 rounded-full bg-orange-500"
+            animate={{
+              y: [0, 10, 0],
+              opacity: [0.3, 1, 0.3],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        <span className="mt-2 text-[8px] font-bold uppercase tracking-[0.35em] text-white/35">
+          Scroll to explore
+        </span>
+      </motion.div>
+
+      {/* Bottom fade */}
+
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
     </section>
-  );
+  )
 }

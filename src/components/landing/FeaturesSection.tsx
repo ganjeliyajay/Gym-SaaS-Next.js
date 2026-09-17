@@ -1,212 +1,231 @@
-"use client";
+"use client"
 
+import Image from "next/image"
 import {
-  CreditCard,
-  FileSignature,
-  DoorOpen,
-  QrCode,
-  ShieldCheck,
   BarChart3,
-  ArrowUpRight,
-  Check,
-} from "lucide-react";
+  CalendarDays,
+  CreditCard,
+  ShieldCheck,
+  Users,
+  UserRoundCog,
+  Zap,
+} from "lucide-react"
 
 const features = [
   {
+    icon: Users,
     number: "01",
-    icon: CreditCard,
-    title: "Authorize.net Integration",
+    title: "Member Management",
     description:
-      "Automate recurring memberships and securely process payments without switching between multiple platforms.",
-    points: [
-      "Recurring billing",
-      "Secure payment processing",
-      "Payment tracking",
-    ],
+      "Keep member profiles, memberships and important customer information organized in one place.",
   },
   {
+    icon: Zap,
     number: "02",
-    icon: FileSignature,
-    title: "Dynamic Legal Waiver Builder",
+    title: "Smart Attendance",
     description:
-      "Create digital waivers for every membership and keep signed documents organized inside your gym platform.",
-    points: [
-      "Custom waiver fields",
-      "Digital signatures",
-      "Centralized records",
-    ],
+      "Track daily check-ins and member activity with a simple attendance workflow.",
   },
   {
+    icon: CreditCard,
     number: "03",
-    icon: DoorOpen,
-    title: "Hardware Door & Turnstile API",
+    title: "Payments & Billing",
     description:
-      "Connect your physical access hardware directly to your membership system for fast and reliable entry control.",
-    points: [
-      "Real-time access control",
-      "Door hardware API",
-      "Instant member validation",
-    ],
+      "Keep membership payments and transaction information organized for easier gym operations.",
   },
   {
+    icon: CalendarDays,
     number: "04",
-    icon: QrCode,
-    title: "QR Generator & Check-ins",
+    title: "Classes & Scheduling",
     description:
-      "Turn cameras, posters, and digital touchpoints into powerful member check-in experiences.",
-    points: [
-      "Camera QR scanning",
-      "Poster & leaflet QRs",
-      "Fast member check-ins",
-    ],
+      "Organize classes and schedules so your team and members stay on the same page.",
   },
   {
+    icon: UserRoundCog,
     number: "05",
-    icon: ShieldCheck,
-    title: "Granular RBAC & Team Invites",
+    title: "Team & Roles",
     description:
-      "Give every team member exactly the access they need while keeping sensitive gym operations protected.",
-    points: [
-      "Custom team roles",
-      "Permission management",
-      "Secure team invites",
-    ],
+      "Manage trainers and staff with role-based access designed around your gym's workflow.",
   },
   {
-    number: "06",
     icon: BarChart3,
-    title: "Executive Super-Admin Analytics",
+    number: "06",
+    title: "Gym Analytics",
     description:
-      "See the bigger picture with powerful analytics for revenue, memberships, locations, and business growth.",
-    points: [
-      "MRR & ARR analytics",
-      "Membership insights",
-      "Multi-location reporting",
-    ],
+      "Bring important gym activity and business insights together through a centralized dashboard.",
   },
-];
+]
 
 export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden bg-[#070b14] py-24 sm:py-28 lg:py-32"
+      className="relative overflow-hidden bg-black py-24 sm:py-28 lg:py-32"
     >
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-20 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-amber-500/[0.045] blur-[150px]" />
+      {/* Background */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-orange-500/[0.045] blur-[140px]" />
 
-      <div className="pointer-events-none absolute bottom-0 left-[-150px] h-[350px] w-[350px] rounded-full bg-orange-500/[0.035] blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-[-10%] h-[400px] w-[400px] rounded-full bg-red-500/[0.035] blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/15 bg-amber-400/[0.06] px-3 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+        {/* =====================================================
+            HEADER
+           ===================================================== */}
 
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">
-              Everything Under One Roof
-            </span>
+        <div
+          data-reveal
+          className="mx-auto max-w-3xl text-center reveal-hidden"
+        >
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-orange-400">
+            <Zap className="h-4 w-4" />
+            Everything in one place
           </div>
 
-          <h2 className="text-3xl font-black tracking-[-0.035em] text-white sm:text-5xl">
-            Everything your gym needs to{" "}
-            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent">
-              operate at its best.
+          <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Run Your Gym
+            <br />
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+              Without The Chaos.
             </span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/40 sm:text-base">
-            Replace disconnected tools with one intelligent operating system
-            built specifically for modern gyms, athletic clubs, and fitness
-            businesses.
+          <p className="mt-6 text-base leading-7 text-white/50 sm:text-lg">
+            Replace scattered tools and manual processes with one modern
+            platform built around the everyday needs of your gym.
           </p>
         </div>
 
-        {/* Feature Grid */}
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => {
-            const Icon = feature.icon;
+        {/* =====================================================
+            FEATURE GRID + IMAGE
+           ===================================================== */}
 
-            return (
-              <div
-                key={feature.number}
-                className="group relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.025] p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-amber-400/20 hover:bg-white/[0.045] hover:shadow-[0_20px_70px_rgba(0,0,0,0.25)]"
-              >
-                {/* Hover glow */}
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-amber-400/[0.08] blur-[55px] opacity-0 transition duration-500 group-hover:opacity-100" />
+        <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:items-stretch">
+          {/* Feature Cards */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            {features.map((feature, index) => {
+              const Icon = feature.icon
 
-                {/* Top row */}
-                <div className="relative flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-400/15 bg-amber-400/[0.07] text-amber-300 transition duration-300 group-hover:scale-105 group-hover:border-amber-400/25 group-hover:bg-amber-400/[0.12]">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} />
-                  </div>
+              return (
+                <article
+                  key={feature.number}
+                  data-reveal
+                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-orange-500/25 hover:bg-white/[0.045] sm:p-7 reveal-hidden"
+                  style={{
+                    transitionDelay: `${index * 80}ms`,
+                  }}
+                >
+                  {/* Hover Glow */}
+                  <div className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-orange-500/0 blur-3xl transition-all duration-500 group-hover:bg-orange-500/15" />
 
-                  <span className="text-xs font-bold tracking-[0.15em] text-white/15">
-                    {feature.number}
-                  </span>
-                </div>
+                  <div className="relative">
+                    <div className="flex items-start justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-orange-500/15 bg-orange-500/10 transition-all duration-500 group-hover:border-orange-500/30 group-hover:bg-orange-500/15">
+                        <Icon className="h-5 w-5 text-orange-400 transition-transform duration-500 group-hover:scale-110" />
+                      </div>
 
-                {/* Content */}
-                <div className="relative mt-6">
-                  <h3 className="text-lg font-extrabold tracking-tight text-white">
-                    {feature.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-white/40">
-                    {feature.description}
-                  </p>
-                </div>
-
-                {/* Points */}
-                <div className="relative mt-6 space-y-2.5 border-t border-white/[0.06] pt-5">
-                  {feature.points.map((point) => (
-                    <div
-                      key={point}
-                      className="flex items-center gap-2.5 text-xs font-medium text-white/50"
-                    >
-                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-400/10">
-                        <Check className="h-2.5 w-2.5 text-amber-400" />
+                      <span className="text-xs font-black tracking-[0.2em] text-white/10 transition-colors duration-500 group-hover:text-orange-500/20">
+                        {feature.number}
                       </span>
-
-                      {point}
                     </div>
-                  ))}
-                </div>
 
-                {/* Bottom arrow */}
-                <div className="relative mt-6 flex items-center justify-end">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.07] text-white/20 transition-all duration-300 group-hover:border-amber-400/20 group-hover:bg-amber-400/10 group-hover:text-amber-400">
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <h3 className="mt-7 text-lg font-black text-white sm:text-xl">
+                      {feature.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-6 text-white/40">
+                      {feature.description}
+                    </p>
+
+                    <div className="mt-6 h-px w-0 bg-gradient-to-r from-orange-500 to-transparent transition-all duration-500 group-hover:w-full" />
                   </div>
-                </div>
+                </article>
+              )
+            })}
+          </div>
 
-                {/* Bottom accent */}
-                <div className="absolute bottom-0 left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent transition-all duration-500 group-hover:w-2/3" />
+          {/* =================================================
+              FEATURE IMAGE
+             ================================================= */}
+
+          <div
+            data-reveal
+            className="relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] lg:col-span-5 reveal-hidden"
+            style={{ transitionDelay: "180ms" }}
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=90"
+              alt="Modern gym interior with fitness equipment"
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover transition-transform duration-1000 hover:scale-105"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.08] via-transparent to-transparent" />
+
+            {/* Image Content */}
+            <div className="absolute inset-x-0 bottom-0 p-7 sm:p-8">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/15 backdrop-blur-md">
+                <ShieldCheck className="h-5 w-5 text-orange-400" />
               </div>
-            );
-          })}
+
+              <h3 className="mt-5 text-2xl font-black text-white sm:text-3xl">
+                One dashboard.
+                <br />
+                <span className="text-orange-400">Total control.</span>
+              </h3>
+
+              <p className="mt-3 max-w-sm text-sm leading-6 text-white/50">
+                Give your gym team the tools they need to manage everyday
+                operations with clarity.
+              </p>
+            </div>
+
+            {/* Floating Badge */}
+            <div className="animate-float absolute right-5 top-5 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 shadow-2xl backdrop-blur-xl sm:right-7 sm:top-7">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                <span className="text-xs font-bold text-white">
+                  All systems active
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom CTA strip */}
-        <div className="mt-6 overflow-hidden rounded-3xl border border-white/[0.07] bg-gradient-to-r from-white/[0.025] via-amber-400/[0.035] to-white/[0.025] p-5 sm:p-6">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <p className="text-sm font-bold text-white">
-                Built to scale with your fitness business.
-              </p>
+        {/* =====================================================
+            BOTTOM VALUE STRIP
+           ===================================================== */}
 
-              <p className="mt-1 text-xs text-white/35">
-                From your first 100 members to multiple locations.
-              </p>
-            </div>
+        <div
+          data-reveal
+          className="mt-6 grid gap-4 sm:grid-cols-3 reveal-hidden"
+          style={{ transitionDelay: "250ms" }}
+        >
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-5 text-center transition-all duration-300 hover:border-orange-500/20 hover:bg-white/[0.035]">
+            <p className="text-2xl font-black text-white">01</p>
+            <p className="mt-1 text-xs font-medium uppercase tracking-wider text-white/30">
+              Centralized platform
+            </p>
+          </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Enterprise-ready infrastructure
-            </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-5 text-center transition-all duration-300 hover:border-orange-500/20 hover:bg-white/[0.035]">
+            <p className="text-2xl font-black text-orange-400">24/7</p>
+            <p className="mt-1 text-xs font-medium uppercase tracking-wider text-white/30">
+              Access to your operations
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-5 text-center transition-all duration-300 hover:border-orange-500/20 hover:bg-white/[0.035]">
+            <p className="text-2xl font-black text-white">∞</p>
+            <p className="mt-1 text-xs font-medium uppercase tracking-wider text-white/30">
+              Built to scale
+            </p>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

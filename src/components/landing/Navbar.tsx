@@ -1,156 +1,178 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import {
-  Dumbbell,
-  ArrowRight,
-  Menu,
-  X,
-  Sparkles,
-} from "lucide-react";
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { ArrowRight, Dumbbell, Menu, X } from "lucide-react"
 
-const navItems = [
-  { label: "Features", href: "#features" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-];
+const navLinks = [
+  { name: "Features", href: "#features" },
+  { name: "How It Works", href: "#how-it-works" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Reviews", href: "#reviews" },
+  { name: "FAQ", href: "#faq" },
+]
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24)
+    }
+
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#070b14]/80 backdrop-blur-2xl">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-white/10 bg-black/85 shadow-2xl shadow-black/20 backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* =====================================================
+            LOGO
+           ===================================================== */}
 
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
         <Link
           href="/"
+          onClick={closeMenu}
+          aria-label="Gym SaaS home"
           className="group flex items-center gap-3"
-          onClick={() => setMobileOpen(false)}
         >
-          <div className="relative">
-            <div className="absolute inset-0 rounded-2xl bg-amber-400/30 blur-lg transition duration-300 group-hover:bg-amber-400/50" />
-
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 text-black shadow-lg shadow-amber-500/20 transition duration-300 group-hover:scale-105">
-              <Dumbbell className="h-5 w-5" strokeWidth={2.5} />
-            </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg shadow-orange-500/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-orange-500/30">
+            <Dumbbell className="h-5.5 w-5.5 text-white" />
           </div>
 
-          <div className="hidden sm:block">
-            <div className="flex items-center gap-2">
-              <span className="font-[outfit] text-lg font-extrabold tracking-tight text-white">
-                ThinkAuric
-              </span>
+          <div className="leading-none">
+            <span className="block text-lg font-black tracking-tight text-white">
+              GYM<span className="text-orange-500">SAAS</span>
+            </span>
 
-              <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.16em] text-amber-300">
-                Gym SaaS
-              </span>
-            </div>
-
-            <p className="mt-0.5 text-[10px] font-medium tracking-wide text-white/35">
-              POWERING MODERN FITNESS
-            </p>
+            <span className="mt-1 hidden text-[9px] font-medium uppercase tracking-[0.25em] text-white/35 sm:block">
+              Manage. Grow. Repeat.
+            </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="group relative rounded-xl px-4 py-2.5 text-xs font-semibold text-white/55 transition-all duration-200 hover:bg-white/[0.04] hover:text-white"
-            >
-              {item.label}
+        {/* =====================================================
+            DESKTOP NAVIGATION
+           ===================================================== */}
 
-              <span className="absolute bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-amber-300 to-amber-500 transition-all duration-300 group-hover:w-5" />
-            </a>
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center gap-7 lg:flex"
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="group relative py-2 text-sm font-medium text-white/60 transition-colors duration-200 hover:text-white"
+            >
+              {link.name}
+
+              <span className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-orange-400 to-red-500 transition-all duration-300 group-hover:w-full" />
+            </Link>
           ))}
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden items-center gap-2 md:flex">
+        {/* =====================================================
+            DESKTOP ACTIONS
+           ===================================================== */}
+
+        <div className="hidden items-center gap-2 lg:flex">
           <Link
             href="/login"
-            className="rounded-xl px-4 py-2.5 text-xs font-bold text-white/60 transition hover:bg-white/[0.04] hover:text-white"
+            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-white/65 transition-all duration-300 hover:bg-white/[0.05] hover:text-white"
           >
-            Sign In
+            Login
           </Link>
 
           <Link
             href="/register"
-            className="group relative flex items-center gap-2 overflow-hidden rounded-xl border border-amber-300/20 bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-2.5 text-xs font-extrabold text-black shadow-lg shadow-amber-500/15 transition-all duration-300 hover:-translate-y-0.5 hover:from-amber-300 hover:to-amber-400 hover:shadow-amber-500/30"
+            className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-orange-500/30"
           >
-            <span className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
-
-            <Sparkles className="relative h-3.5 w-3.5" />
-            <span className="relative">Get Started</span>
-
-            <ArrowRight className="relative h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            Get Started
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* =====================================================
+            MOBILE MENU BUTTON
+           ===================================================== */}
+
         <button
           type="button"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white transition hover:border-amber-400/30 hover:bg-amber-400/10 md:hidden"
+          onClick={() => setIsOpen((previous) => !previous)}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-orange-500/50 lg:hidden"
         >
-          {mobileOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
+          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* =====================================================
+          MOBILE NAVIGATION
+         ===================================================== */}
+
       <div
-        className={`overflow-hidden border-t border-white/[0.06] bg-[#080c16] transition-all duration-300 md:hidden ${
-          mobileOpen
-            ? "max-h-[420px] opacity-100"
-            : "max-h-0 border-t-transparent opacity-0"
+        className={`overflow-hidden border-t border-white/10 bg-black/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+          isOpen
+            ? "max-h-[600px] opacity-100"
+            : "max-h-0 border-transparent opacity-0"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
-          <nav className="space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-white/65 transition hover:bg-white/[0.05] hover:text-amber-300"
+        <nav
+          aria-label="Mobile navigation"
+          className="mx-auto max-w-7xl px-4 py-5 sm:px-6"
+        >
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={closeMenu}
+                className="rounded-xl px-4 py-3.5 text-sm font-semibold text-white/60 transition-all duration-200 hover:bg-white/[0.05] hover:text-white"
               >
-                <span>{item.label}</span>
-                <ArrowRight className="h-4 w-4 text-white/20" />
-              </a>
+                {link.name}
+              </Link>
             ))}
-          </nav>
 
-          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.06] pt-4">
+            <div className="my-3 h-px bg-white/10" />
+
             <Link
               href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-xs font-bold text-white/70 transition hover:bg-white/[0.06] hover:text-white"
+              onClick={closeMenu}
+              className="rounded-xl px-4 py-3.5 text-sm font-semibold text-white/65 transition-all duration-200 hover:bg-white/[0.05] hover:text-white"
             >
-              Sign In
+              Login
             </Link>
 
             <Link
               href="/register"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-3 text-xs font-extrabold text-black shadow-lg shadow-amber-500/15 transition hover:from-amber-300 hover:to-amber-400"
+              onClick={closeMenu}
+              className="mt-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/15"
             >
               Get Started
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
-  );
+  )
 }

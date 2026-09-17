@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF500"/>
+      <stop offset="52%" stop-color="#FFD21A"/>
+      <stop offset="100%" stop-color="#FF8A00"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <!-- Transparent outside the rounded logo shape -->
+  <rect x="95" y="96" width="1058" height="1048" rx="315"
+        fill="url(#bg)" filter="url(#softShadow)"/>
+
+  <!-- Vectorized dumbbell -->
+  <g fill="#050505">
+    <path d="M 345 809 L 335 819 L 330 832 L 331 844 L 335 853 L 374 895 L 384 904 L 394 908 L 407 908 L 413 906 L 419 902 L 429 892 L 429 887 L 385 840 L 354 809 L 352 808 Z"/><path d="M 366 703 L 339 728 L 333 739 L 332 759 L 339 773 L 475 915 L 491 923 L 506 923 L 519 918 L 547 892 L 550 886 L 549 880 L 381 704 L 375 701 Z"/><path d="M 412 601 L 372 639 L 367 653 L 372 674 L 579 890 L 595 897 L 610 896 L 622 890 L 667 847 L 671 826 L 666 812 L 463 605 L 440 594 L 425 595 Z"/><path d="M 680 549 L 673 551 L 548 663 L 549 667 L 602 722 L 605 722 L 732 607 L 731 602 Z"/><path d="M 665 397 L 630 430 L 624 440 L 622 454 L 629 471 L 840 694 L 856 701 L 869 701 L 886 693 L 925 656 L 930 644 L 930 632 L 924 618 L 717 403 L 693 390 L 677 391 Z"/><path d="M 870 392 L 862 400 L 862 404 L 864 407 L 940 484 L 944 484 L 950 480 L 956 473 L 960 464 L 960 450 L 956 441 L 904 390 L 896 387 L 881 387 Z"/><path d="M 762 379 L 743 398 L 742 405 L 922 594 L 931 593 L 950 575 L 962 559 L 965 542 L 958 523 L 815 377 L 801 370 L 783 369 Z"/>
+  </g>
+</svg>

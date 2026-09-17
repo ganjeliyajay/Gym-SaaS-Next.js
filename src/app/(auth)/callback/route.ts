@@ -4,9 +4,11 @@ import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
+
   const code = requestUrl.searchParams.get("code")
   const next = requestUrl.searchParams.get("next") || "/invite/accept"
 
+  // Code missing
   if (!code) {
     return NextResponse.redirect(
       new URL("/login?error=missing_code", request.url),
@@ -23,26 +25,33 @@ export async function GET(request: Request) {
         getAll() {
           return cookieStore.getAll()
         },
+
         setAll(cookiesToSet) {
           try {
             cookiesToSet.forEach(({ name, value, options }) => {
               cookieStore.set(name, value, options)
             })
-          } catch {}
+          } catch {
+            // Cookie writes can fail in some server contexts.
+          }
         },
       },
     },
   )
 
+  // Exchange Supabase auth code for session
   const { error } = await supabase.auth.exchangeCodeForSession(code)
 
   if (error) {
     console.error("Auth callback error:", error)
 
     return NextResponse.redirect(
-      new URL("/login?error=invite_failed", request.url),
+      new URL("/login?error=auth_callback_failed", request.url),
     )
   }
 
-  return NextResponse.redirect(new URL(next, request.url))
+  // Prevent external redirects.
+  const safeNext = next.startsWith("/") ? next : "/invite/accept"
+
+  return NextResponse.redirect(new URL(safeNext, request.url))
 }

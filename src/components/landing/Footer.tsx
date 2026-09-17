@@ -1,179 +1,164 @@
-import Link from "next/link";
-import {
-  Dumbbell,
-  ArrowUpRight,
-  ShieldCheck,
-  CreditCard,
-  Zap,
-} from "lucide-react";
+"use client"
 
-const footerLinks = {
-  Product: [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "FAQ", href: "#faq" },
-  ],
-  Platform: [
-    { label: "Gym Dashboard", href: "/dashboard" },
-    { label: "Member Management", href: "/dashboard/members" },
-    { label: "Billing", href: "/dashboard/billing" },
-    { label: "Check-in", href: "/dashboard/checkin" },
-  ],
-  Company: [
-    { label: "Sign In", href: "/login" },
-    { label: "Get Started", href: "/register" },
-  ],
-};
+import Link from "next/link"
+
+import { ArrowUpRight, Camera, Dumbbell, Mail, MapPin } from "lucide-react"
+
+const productLinks = [
+  { name: "Features", href: "#features" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Reviews", href: "#reviews" },
+  { name: "FAQ", href: "#faq" },
+]
+
+const accountLinks = [
+  { name: "Login", href: "/login" },
+  { name: "Get Started", href: "/register" },
+]
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.07] bg-[#050810]">
-      {/* Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[350px] w-[600px] -translate-x-1/2 rounded-full bg-amber-500/[0.035] blur-[130px]" />
+    <footer className="relative overflow-hidden border-t border-white/10 bg-black">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-orange-500/5 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Main footer */}
-        <div className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_0.8fr] lg:gap-16">
+        {/* Main Footer */}
+        <div className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
-          <div>
+          <div className="max-w-sm">
             <Link href="/" className="group inline-flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-2xl bg-amber-400/20 blur-lg transition group-hover:bg-amber-400/35" />
-
-                <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-300 to-orange-500 text-black">
-                  <Dumbbell className="h-5 w-5" strokeWidth={2.5} />
-                </div>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600 shadow-lg shadow-orange-500/20 transition-transform duration-300 group-hover:scale-105">
+                <Dumbbell className="h-5 w-5 text-white" />
               </div>
 
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-lg font-black tracking-tight text-white">
-                    ThinkAuric
-                  </span>
+              <div className="leading-none">
+                <span className="block text-lg font-black tracking-tight text-white">
+                  GYM<span className="text-orange-500">SAAS</span>
+                </span>
 
-                  <span className="rounded-full border border-amber-400/15 bg-amber-400/[0.06] px-2 py-0.5 text-[8px] font-black uppercase tracking-wider text-amber-300">
-                    Gym SaaS
-                  </span>
-                </div>
-
-                <p className="mt-0.5 text-[9px] font-bold tracking-[0.16em] text-white/20">
-                  POWERING MODERN FITNESS
-                </p>
+                <span className="mt-1 block text-[9px] font-medium uppercase tracking-[0.25em] text-white/35">
+                  Manage. Grow. Repeat.
+                </span>
               </div>
             </Link>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/30">
-              The complete operating system for modern gyms, martial arts
-              dojos, CrossFit boxes, and fitness franchises.
+            <p className="mt-6 text-sm leading-7 text-white/45">
+              A modern gym management platform built to help fitness businesses
+              simplify operations, manage members and focus on growth.
             </p>
 
-            {/* Trust badges */}
-            <div className="mt-7 space-y-2">
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/25">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-400/70" />
-                Secure Cloud Infrastructure
-              </div>
+            {/* Location */}
+            <div className="mt-6 flex items-center gap-2 text-sm text-white/35">
+              <MapPin className="h-4 w-4 text-orange-500" />
+              <span>India</span>
+            </div>
 
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/25">
-                <CreditCard className="h-3.5 w-3.5 text-amber-400/70" />
-                Authorize.net Certified Gateway Partner
-              </div>
+            {/* Social */}
+            <div className="mt-6 flex items-center gap-3">
+              <a
+                href="https://www.instagram.com/ganjeliya_jay_0745/?utm_source=ig_web_button_share_sheet"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white/50 transition-all duration-300 hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400"
+              >
+                <Camera className="h-4 w-4" />
+              </a>
+
+              <a
+                href="mailto:ganjeliyajay0745@gmail.com?subject=Gym%20SaaS%20Inquiry&body=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Gym%20SaaS."
+                aria-label="Email"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white/50 transition-all duration-300 hover:border-orange-500/30 hover:bg-orange-500/10 hover:text-orange-400"
+              >
+                <Mail className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
           {/* Product */}
           <div>
-            <h3 className="text-[10px] font-black uppercase tracking-[0.18em] text-white/25">
-              Product
-            </h3>
+            <h3 className="text-sm font-bold text-white">Product</h3>
 
-            <div className="mt-5 space-y-3">
-              {footerLinks.Product.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center gap-1.5 text-xs font-semibold text-white/40 transition hover:text-amber-300"
-                >
-                  {link.label}
+            <ul className="mt-5 space-y-3">
+              {productLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1 text-sm text-white/40 transition-colors duration-200 hover:text-white"
+                  >
+                    {link.name}
 
-                  <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-                </a>
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Platform */}
+          {/* Account */}
           <div>
-            <h3 className="text-[10px] font-black uppercase tracking-[0.18em] text-white/25">
-              Platform
-            </h3>
+            <h3 className="text-sm font-bold text-white">Account</h3>
 
-            <div className="mt-5 space-y-3">
-              {footerLinks.Platform.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center gap-1.5 text-xs font-semibold text-white/40 transition hover:text-amber-300"
-                >
-                  {link.label}
+            <ul className="mt-5 space-y-3">
+              {accountLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1 text-sm text-white/40 transition-colors duration-200 hover:text-white"
+                  >
+                    {link.name}
 
-                  <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-                </Link>
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Company */}
+          {/* Contact */}
           <div>
-            <h3 className="text-[10px] font-black uppercase tracking-[0.18em] text-white/25">
-              Get Started
-            </h3>
+            <h3 className="text-sm font-bold text-white">Get Started</h3>
 
-            <div className="mt-5 space-y-3">
-              {footerLinks.Company.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center gap-1.5 text-xs font-semibold text-white/40 transition hover:text-amber-300"
-                >
-                  {link.label}
-
-                  <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
-                </Link>
-              ))}
-            </div>
+            <p className="mt-5 text-sm leading-6 text-white/40">
+              Ready to take control of your gym operations?
+            </p>
 
             <Link
               href="/register"
-              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2.5 text-xs font-extrabold text-black shadow-lg shadow-amber-500/10 transition hover:-translate-y-0.5 hover:shadow-amber-500/20"
+              className="group mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-orange-500/25"
             >
-              <Zap className="h-3.5 w-3.5" />
-              Start Building
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              Start Now
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="flex flex-col gap-4 border-t border-white/[0.07] py-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[10px] font-medium text-white/20">
-            © 2026 ThinkAuric Inc. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="flex flex-col gap-5 border-t border-white/10 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} Gym SaaS. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/15">
-              Enterprise Cloud
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 text-xs font-semibold text-white/40 transition-colors duration-200 hover:text-white"
+          >
+            Back to top
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] transition-all duration-300 group-hover:border-orange-500/30 group-hover:bg-orange-500/10">
+              ↑
             </span>
-
-            <span className="h-3 w-px bg-white/[0.08]" />
-
-            <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/15">
-              Built for Fitness
-            </span>
-          </div>
+          </button>
         </div>
       </div>
     </footer>
-  );
+  )
 }

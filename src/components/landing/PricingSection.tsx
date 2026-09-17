@@ -1,118 +1,130 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import {
-  Check,
-  ArrowRight,
-  Sparkles,
-  Building2,
-  Crown,
-  Zap,
-} from "lucide-react";
+import Link from "next/link"
+import { Check, Crown, Sparkles, Zap } from "lucide-react"
+import { useState } from "react"
 
-type BillingPeriod = "monthly" | "annual";
+type BillingCycle = "monthly" | "yearly"
 
 const plans = [
   {
     name: "Starter",
-    subtitle: "Single Studio",
+    label: "For small gyms",
+    monthly: 999,
+    yearly: 9990,
+    description:
+      "Everything you need to organize the core operations of a growing gym.",
     icon: Zap,
-    monthly: 119,
-    annual: 99,
-    description: "Everything you need to run a growing fitness studio.",
     features: [
-      "Up to 250 active members",
-      "Authorize.net checkout",
-      "Dynamic legal waivers",
-      "Camera QR scanner",
       "Member management",
-      "Basic reporting",
+      "Membership management",
+      "Attendance tracking",
+      "Basic payment tracking",
+      "Basic dashboard",
+      "1 admin account",
     ],
-    popular: false,
   },
   {
-    name: "Growth Facility",
-    subtitle: "Scaling Club",
-    icon: Crown,
-    monthly: 239,
-    annual: 199,
-    description: "Advanced tools for gyms ready to scale operations.",
-    features: [
-      "Unlimited active members",
-      "Hardware door API",
-      "Class calendar & SMS",
-      "Custom subdomain",
-      "Leaflet & poster QRs",
-      "Full RBAC & team invites",
-      "Advanced analytics",
-    ],
+    name: "Growth",
+    label: "For growing gyms",
+    monthly: 2999,
+    yearly: 29990,
+    description:
+      "Powerful tools for gyms that are ready to streamline operations and grow.",
+    icon: Sparkles,
     popular: true,
+    features: [
+      "Everything in Starter",
+      "Advanced dashboard",
+      "Classes & scheduling",
+      "Team & trainer management",
+      "Role-based access",
+      "Advanced payment management",
+      "Business insights",
+    ],
   },
   {
-    name: "Franchise Enterprise",
-    subtitle: "Multi-Location",
-    icon: Building2,
-    monthly: 479,
-    annual: 399,
-    description: "Complete infrastructure for multi-location fitness brands.",
+    name: "Pro",
+    label: "For serious growth",
+    monthly: 6999,
+    yearly: 69990,
+    description:
+      "A complete operational platform for larger and more ambitious fitness businesses.",
+    icon: Crown,
     features: [
       "Everything in Growth",
-      "Multi-location switching",
-      "Super-admin impersonation",
-      "MRR / ARR / ARPU telemetry",
-      "Executive analytics",
-      "Priority infrastructure",
-      "Dedicated account manager",
+      "Advanced analytics",
+      "Advanced team controls",
+      "Priority features",
+      "Scalable gym operations",
+      "Premium management tools",
+      "Built for multi-workflow operations",
     ],
-    popular: false,
   },
-];
+]
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 0,
+  }).format(price)
 
 export default function PricingSection() {
-  const [billingPeriod, setBillingPeriod] =
-    useState<BillingPeriod>("annual");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly")
 
   return (
     <section
       id="pricing"
-      className="relative overflow-hidden bg-[#070b14] py-24 sm:py-28 lg:py-32"
+      className="relative overflow-hidden bg-black py-24 sm:py-28 lg:py-32"
     >
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-amber-500/[0.045] blur-[150px]" />
+      {/* Background */}
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-orange-500/[0.045] blur-[150px]" />
+
+      <div className="pointer-events-none absolute bottom-0 left-[-10%] h-96 w-96 rounded-full bg-red-500/[0.03] blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/15 bg-amber-400/[0.06] px-3 py-1.5">
-            <Sparkles className="h-3 w-3 text-amber-400" />
+        {/* =====================================================
+            HEADER
+           ===================================================== */}
 
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">
-              Simple, Transparent Pricing
-            </span>
+        <div
+          data-reveal
+          className="mx-auto max-w-3xl text-center reveal-hidden"
+        >
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-orange-400">
+            <Sparkles className="h-4 w-4" />
+            Simple pricing
           </div>
 
-          <h2 className="text-3xl font-black tracking-[-0.035em] text-white sm:text-5xl">
-            Choose the plan that fits your{" "}
-            <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent">
-              ambition.
+          <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Choose Your
+            <br />
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+              Growth Plan.
             </span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/40 sm:text-base">
-            Start small, scale fast, and upgrade whenever your business is
-            ready.
+          <p className="mt-6 text-base leading-7 text-white/50 sm:text-lg">
+            Start with the tools you need today and upgrade as your gym grows.
           </p>
+        </div>
 
-          {/* Billing Toggle */}
-          <div className="mt-8 inline-flex rounded-2xl border border-white/[0.08] bg-white/[0.025] p-1 backdrop-blur-xl">
+        {/* =====================================================
+            BILLING TOGGLE
+           ===================================================== */}
+
+        <div
+          data-reveal
+          className="mt-10 flex justify-center reveal-hidden"
+          style={{ transitionDelay: "100ms" }}
+        >
+          <div className="flex items-center rounded-2xl border border-white/10 bg-white/[0.035] p-1.5 shadow-xl backdrop-blur-xl">
             <button
               type="button"
-              onClick={() => setBillingPeriod("monthly")}
-              className={`rounded-xl px-5 py-2.5 text-xs font-bold transition-all ${
-                billingPeriod === "monthly"
-                  ? "bg-white/[0.08] text-white shadow-lg"
-                  : "text-white/35 hover:text-white/60"
+              onClick={() => setBillingCycle("monthly")}
+              className={`rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                billingCycle === "monthly"
+                  ? "bg-white text-black shadow-lg"
+                  : "text-white/45 hover:text-white"
               }`}
             >
               Monthly
@@ -120,191 +132,174 @@ export default function PricingSection() {
 
             <button
               type="button"
-              onClick={() => setBillingPeriod("annual")}
-              className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold transition-all ${
-                billingPeriod === "annual"
-                  ? "bg-amber-400 text-black shadow-lg shadow-amber-500/15"
-                  : "text-white/35 hover:text-white/60"
+              onClick={() => setBillingCycle("yearly")}
+              className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                billingCycle === "yearly"
+                  ? "bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg shadow-orange-500/20"
+                  : "text-white/45 hover:text-white"
               }`}
             >
-              Annual
+              Yearly
               <span
-                className={`rounded-full px-1.5 py-0.5 text-[8px] font-black ${
-                  billingPeriod === "annual"
-                    ? "bg-black/10 text-black"
-                    : "bg-emerald-400/10 text-emerald-400"
+                className={`rounded-full px-2 py-0.5 text-[9px] font-black uppercase ${
+                  billingCycle === "yearly"
+                    ? "bg-white/20 text-white"
+                    : "bg-orange-500/10 text-orange-400"
                 }`}
               >
-                SAVE
+                Save
               </span>
             </button>
           </div>
         </div>
 
-        {/* Pricing Cards */}
+        {/* =====================================================
+            PRICING CARDS
+           ===================================================== */}
+
         <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:items-stretch">
-          {plans.map((plan) => {
-            const Icon = plan.icon;
+          {plans.map((plan, index) => {
+            const Icon = plan.icon
             const price =
-              billingPeriod === "annual" ? plan.annual : plan.monthly;
+              billingCycle === "monthly" ? plan.monthly : plan.yearly
 
             return (
-              <div
+              <article
                 key={plan.name}
-                className={`group relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-500 sm:p-7 ${
+                data-reveal
+                className={`group relative flex flex-col rounded-[2rem] p-[1px] reveal-hidden ${
                   plan.popular
-                    ? "border-amber-400/30 bg-gradient-to-b from-amber-400/[0.08] via-white/[0.035] to-white/[0.02] shadow-[0_25px_90px_rgba(245,158,11,0.09)] lg:-translate-y-2"
-                    : "border-white/[0.08] bg-white/[0.025] hover:-translate-y-1 hover:border-white/[0.14] hover:bg-white/[0.04]"
+                    ? "bg-gradient-to-b from-orange-400 via-orange-500/50 to-red-600/20 shadow-2xl shadow-orange-500/10 lg:scale-[1.035] lg:z-10"
+                    : "bg-white/10"
                 }`}
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
               >
-                {/* Popular glow */}
-                {plan.popular && (
-                  <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-amber-400/[0.09] blur-[70px]" />
-                )}
-
-                {/* Popular badge */}
-                {plan.popular && (
-                  <div className="absolute right-5 top-5 flex items-center gap-1.5 rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-1">
-                    <Sparkles className="h-3 w-3 text-amber-400" />
-
-                    <span className="text-[8px] font-black uppercase tracking-[0.15em] text-amber-300">
+                <div
+                  className={`relative flex h-full flex-col overflow-hidden rounded-[calc(2rem-1px)] p-6 sm:p-8 ${
+                    plan.popular
+                      ? "bg-gradient-to-b from-orange-500/[0.09] via-black to-black"
+                      : "bg-gradient-to-b from-white/[0.05] to-white/[0.02]"
+                  }`}
+                >
+                  {/* Popular Badge */}
+                  {plan.popular && (
+                    <div className="absolute right-6 top-6 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.12em] text-white shadow-lg shadow-orange-500/20">
+                      <Crown className="h-3 w-3" />
                       Most Popular
-                    </span>
-                  </div>
-                )}
+                    </div>
+                  )}
 
-                {/* Plan icon */}
-                <div className="relative">
+                  {/* Glow */}
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${
+                    className={`pointer-events-none absolute -right-24 -top-24 h-48 w-48 rounded-full blur-3xl ${
                       plan.popular
-                        ? "border-amber-400/25 bg-amber-400/10 text-amber-300"
-                        : "border-white/[0.08] bg-white/[0.04] text-white/50"
-                    }`}
+                        ? "bg-orange-500/15"
+                        : "bg-orange-500/0 group-hover:bg-orange-500/10"
+                    } transition-all duration-500`}
+                  />
+
+                  {/* Icon */}
+                  <div
+                    className={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${
+                      plan.popular
+                        ? "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
+                        : "border border-white/10 bg-white/[0.05] text-orange-400"
+                    } transition-all duration-300 group-hover:scale-105`}
                   >
                     <Icon className="h-5 w-5" />
                   </div>
-                </div>
 
-                {/* Plan title */}
-                <div className="relative mt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/25">
-                    {plan.subtitle}
-                  </p>
+                  {/* Plan Name */}
+                  <div className="relative mt-6">
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/35">
+                      {plan.label}
+                    </p>
 
-                  <h3 className="mt-1 text-xl font-black tracking-tight text-white">
-                    {plan.name}
-                  </h3>
+                    <h3 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+                      {plan.name}
+                    </h3>
 
-                  <p className="mt-3 min-h-[48px] text-sm leading-6 text-white/35">
-                    {plan.description}
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="relative mt-7 border-y border-white/[0.06] py-6">
-                  <div className="flex items-end gap-1">
-                    <span className="text-4xl font-black tracking-[-0.04em] text-white">
-                      ${price}
-                    </span>
-
-                    <span className="mb-1.5 text-xs font-medium text-white/25">
-                      / month
-                    </span>
+                    <p className="mt-3 min-h-[72px] text-sm leading-6 text-white/40">
+                      {plan.description}
+                    </p>
                   </div>
 
-                  <p className="mt-2 text-[10px] text-white/25">
-                    {billingPeriod === "annual"
-                      ? "Billed annually"
-                      : "Billed monthly"}
-                  </p>
-                </div>
+                  {/* Price */}
+                  <div className="relative mt-7 border-y border-white/10 py-6">
+                    <div className="flex items-end gap-1">
+                      <span className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+                        ₹{formatPrice(price)}
+                      </span>
 
-                {/* CTA */}
-                <Link
-                  href="/register"
-                  className={`relative mt-6 flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-xs font-extrabold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-amber-400 to-orange-500 text-black shadow-lg shadow-amber-500/15 hover:-translate-y-0.5 hover:shadow-amber-500/25"
-                      : "border border-white/10 bg-white/[0.04] text-white hover:border-amber-400/20 hover:bg-white/[0.07]"
-                  }`}
-                >
-                  {plan.popular ? "Start Growing" : "Get Started"}
+                      <span className="mb-1 text-sm text-white/35">
+                        /{billingCycle === "monthly" ? "month" : "year"}
+                      </span>
+                    </div>
 
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                    {billingCycle === "yearly" && (
+                      <p className="mt-2 text-xs font-semibold text-orange-400">
+                        Annual billing
+                      </p>
+                    )}
+                  </div>
 
-                {/* Features */}
-                <div className="relative mt-7 flex-1">
-                  <p className="mb-4 text-[9px] font-bold uppercase tracking-[0.18em] text-white/20">
-                    Everything included
-                  </p>
+                  {/* CTA */}
+                  <Link
+                    href="/register"
+                    className={`relative mt-7 flex items-center justify-center rounded-xl px-5 py-3.5 text-sm font-bold transition-all duration-300 ${
+                      plan.popular
+                        ? "bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-lg shadow-orange-500/20 hover:-translate-y-0.5 hover:shadow-orange-500/30"
+                        : "border border-white/10 bg-white/[0.05] text-white hover:border-orange-500/25 hover:bg-orange-500/10"
+                    }`}
+                  >
+                    Start with {plan.name}
+                  </Link>
 
-                  <div className="space-y-3">
-                    {plan.features.map((feature) => (
-                      <div
-                        key={feature}
-                        className="flex items-start gap-2.5"
-                      >
-                        <span
-                          className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
-                            plan.popular
-                              ? "bg-amber-400/10"
-                              : "bg-white/[0.05]"
-                          }`}
+                  {/* Features */}
+                  <div className="relative mt-8 flex-1">
+                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/30">
+                      What&apos;s included
+                    </p>
+
+                    <ul className="mt-5 space-y-3.5">
+                      {plan.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-start gap-3 text-sm text-white/55"
                         >
-                          <Check
-                            className={`h-2.5 w-2.5 ${
-                              plan.popular
-                                ? "text-amber-400"
-                                : "text-white/40"
-                            }`}
-                          />
-                        </span>
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-500/10">
+                            <Check className="h-3 w-3 text-orange-400" />
+                          </span>
 
-                        <span className="text-xs leading-5 text-white/45">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-
-                {/* Bottom accent */}
-                <div
-                  className={`absolute bottom-0 left-1/2 h-px -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-400/60 to-transparent transition-all duration-500 ${
-                    plan.popular
-                      ? "w-2/3"
-                      : "w-0 group-hover:w-1/2"
-                  }`}
-                />
-              </div>
-            );
+              </article>
+            )
           })}
         </div>
 
-        {/* Bottom reassurance */}
-        <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
-          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/25">
-            <Check className="h-3.5 w-3.5 text-emerald-400" />
-            No hidden setup fees
-          </div>
+        {/* =====================================================
+            BOTTOM NOTE
+           ===================================================== */}
 
-          <span className="hidden h-3 w-px bg-white/10 sm:block" />
-
-          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/25">
-            <Check className="h-3.5 w-3.5 text-emerald-400" />
-            Upgrade anytime
-          </div>
-
-          <span className="hidden h-3 w-px bg-white/10 sm:block" />
-
-          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-white/25">
-            <Check className="h-3.5 w-3.5 text-emerald-400" />
-            Built to scale
-          </div>
+        <div
+          data-reveal
+          className="mx-auto mt-10 max-w-3xl text-center reveal-hidden"
+          style={{ transitionDelay: "350ms" }}
+        >
+          <p className="text-xs leading-6 text-white/30">
+            Plans shown above are presented in Indian Rupees (INR). Choose the
+            plan that matches your current gym operations and scale as your
+            requirements grow.
+          </p>
         </div>
       </div>
     </section>
-  );
+  )
 }
