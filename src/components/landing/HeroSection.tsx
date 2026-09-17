@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Play,
   ShieldCheck,
-  Users,
   Zap,
 } from "lucide-react"
 
@@ -56,7 +55,7 @@ export default function HeroSection() {
           }}
         >
           <Image
-            src="/images/gym-hero.png"
+            src="/images/landing/gym-hero.png"
             alt="Modern gym training environment"
             fill
             priority
